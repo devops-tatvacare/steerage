@@ -12,7 +12,7 @@ import { SettingsPage } from "@/features/settings/page";
 
 export function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/steerage">
       <AppShell>
         <Routes>
           <Route path="/" element={<DashboardPage />} />
