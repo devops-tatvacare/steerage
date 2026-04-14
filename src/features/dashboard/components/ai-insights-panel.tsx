@@ -2,6 +2,8 @@ import { useState } from "react";
 import { DashboardCard } from "@/components/shared/dashboard-card";
 import { Button } from "@/components/ui/button";
 import { Sparkles, RefreshCw, Loader2 } from "lucide-react";
+import { generateInsights } from "@/lib/gemini";
+import { useDashboardStore } from "@/stores/dashboard-store";
 
 const FALLBACK_INSIGHTS = [
   "Acceptance rate for cardiology has increased 12% since adjusting Access weight from 15% to 30%",
@@ -13,12 +15,21 @@ const FALLBACK_INSIGHTS = [
 export function AiInsightsPanel() {
   const [insights, setInsights] = useState(FALLBACK_INSIGHTS);
   const [loading, setLoading] = useState(false);
+  const kpis = useDashboardStore((s) => s.kpis);
 
   const refresh = async () => {
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1000));
-    setInsights([...FALLBACK_INSIGHTS].sort(() => Math.random() - 0.5));
-    setLoading(false);
+    try {
+      const serialized = kpis
+        .map((k) => `${k.kpiType}: ${k.value} (target: ${k.target}, trend: ${k.trend > 0 ? "+" : ""}${k.trend}%)`)
+        .join("\n");
+      const results = await generateInsights(serialized || "No KPI data available");
+      setInsights(results);
+    } catch {
+      setInsights(FALLBACK_INSIGHTS);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
