@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { Calculator } from "lucide-react";
 import { DashboardCard } from "@/components/shared/dashboard-card";
+import { MetricTooltip } from "@/components/shared/metric-tooltip";
 import { MOCK_STEERAGE_EVENTS } from "@/mock-data/members";
 
 function formatRM(value: number): string {
@@ -63,7 +64,10 @@ export function RoiSummary() {
           <p className="text-2xl font-bold text-text-primary">
             {metrics.totalSteered}
           </p>
-          <p className="mt-0.5 text-xs text-text-muted">rules applied</p>
+          <p className="mt-0.5 inline-flex items-center gap-1 text-xs text-text-muted">
+            rules applied
+            <MetricTooltip title="Transactions Steered" description="Number of member transactions where the steerage rule engine applied a provider recommendation." formula="COUNT(events WHERE type = recommendation)" />
+          </p>
         </div>
 
         {/* Acceptance Rate */}
@@ -71,8 +75,9 @@ export function RoiSummary() {
           <p className="text-2xl font-bold text-text-primary">
             {metrics.acceptanceRate}%
           </p>
-          <p className="mt-0.5 text-xs text-text-muted">
+          <p className="mt-0.5 inline-flex items-center gap-1 text-xs text-text-muted">
             {metrics.acceptedCount} of {metrics.totalSteered} accepted
+            <MetricTooltip title="Steerage Acceptance Rate" description="Proportion of steered transactions where the member followed the recommendation and booked the suggested provider." formula="Accepted / Total steered x 100" target=">= 60%" />
           </p>
         </div>
 
@@ -81,8 +86,9 @@ export function RoiSummary() {
           <p className="text-2xl font-bold text-status-success">
             {formatRM(metrics.totalSavings)}
           </p>
-          <p className="mt-0.5 text-xs text-text-muted">
+          <p className="mt-0.5 inline-flex items-center gap-1 text-xs text-text-muted">
             potential {formatRM(metrics.lostSavings)} lost
+            <MetricTooltip title="Savings Generated" description="Estimated cost avoided by members choosing the recommended lower-cost provider instead of their initial preference." formula="SUM(cost differential x acceptance events)" />
           </p>
         </div>
       </div>

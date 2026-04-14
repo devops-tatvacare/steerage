@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { Target } from "lucide-react";
 import { DashboardCard } from "@/components/shared/dashboard-card";
+import { MetricTooltip } from "@/components/shared/metric-tooltip";
 import { Progress } from "@/components/ui/progress";
 import { MOCK_MEMBERS } from "@/mock-data/members";
 import { cn } from "@/lib/cn";
@@ -65,8 +66,9 @@ export function SteerageReadiness() {
         {/* Overall engagement */}
         <div>
           <div className="flex items-baseline justify-between">
-            <span className="text-xs font-medium text-text-secondary">
+            <span className="inline-flex items-center gap-1 text-xs font-medium text-text-secondary">
               Overall engagement
+              <MetricTooltip title="Overall Engagement" description="Percentage of all members who perform at least 50% of their healthcare transactions through the app." formula="Members with >= 50% app transactions / Total members x 100" />
             </span>
             <span className="text-lg font-bold text-text-primary">
               {data.engagementRate}%
@@ -78,8 +80,9 @@ export function SteerageReadiness() {
         {/* High-cost engagement */}
         <div>
           <div className="flex items-baseline justify-between">
-            <span className="text-xs font-medium text-text-secondary">
+            <span className="inline-flex items-center gap-1 text-xs font-medium text-text-secondary">
               High-cost engagement
+              <MetricTooltip title="High-Cost Engagement" description="Percentage of high-cost members (above median annual spend) who are actively using the app. This is the critical prerequisite for effective steerage." formula="High-cost members on app / Total high-cost members x 100" target=">= 50%" />
             </span>
             <span
               className={cn(

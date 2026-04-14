@@ -4,7 +4,7 @@ import { cn } from "@/lib/cn";
 import { ArrowUp, ArrowDown } from "lucide-react";
 
 interface KpiCardProps {
-  label: string;
+  label: React.ReactNode;
   value: string | number;
   subtitle?: string;
   trend?: { direction: "up" | "down"; value: string; positive?: boolean };
