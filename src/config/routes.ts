@@ -10,7 +10,7 @@ export interface RouteConfig {
 }
 
 export const ROUTES = {
-  dashboard: { path: "/", label: "Dashboard", icon: LayoutDashboard, group: "primary" as const, showInSidebar: true },
+  dashboard: { path: "/", label: "Command Center", icon: LayoutDashboard, group: "primary" as const, showInSidebar: true },
   ruleEngine: { path: "/rule-engine", label: "Rule Engine", icon: SlidersHorizontal, group: "primary" as const, showInSidebar: true },
   providerNetwork: { path: "/providers", label: "Provider Network", icon: Building2, group: "primary" as const, showInSidebar: true },
   interventions: { path: "/interventions", label: "Interventions", icon: Megaphone, group: "primary" as const, showInSidebar: true },

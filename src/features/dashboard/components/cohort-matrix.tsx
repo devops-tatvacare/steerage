@@ -78,13 +78,13 @@ export function CohortMatrix() {
 
   const accentStyles: Record<Quadrant["accent"], string> = {
     success:
-      "border-l-[3px] border-l-[color:var(--color-status-success)] bg-[color:var(--color-status-success-bg)]",
+      "border-l-[3px] border-l-[color:var(--color-status-success)] bg-[color:var(--color-surface-subtle)]",
     error:
-      "border-l-[3px] border-l-[color:var(--color-status-error)] bg-[color:var(--color-status-error-bg)]",
+      "border-l-[3px] border-l-[color:var(--color-status-error)] bg-[color:var(--color-surface-subtle)]",
     info:
-      "border-l-[3px] border-l-[color:var(--color-status-info)] bg-[color:var(--color-status-info-bg)]",
+      "border-l-[3px] border-l-[color:var(--color-status-info)] bg-[color:var(--color-surface-subtle)]",
     muted:
-      "border-l-[3px] border-l-[color:var(--color-surface-border-strong)] bg-[color:var(--color-surface-muted)]",
+      "border-l-[3px] border-l-[color:var(--color-surface-border)] bg-[color:var(--color-surface-subtle)]",
   };
 
   const labelStyles: Record<Quadrant["accent"], string> = {

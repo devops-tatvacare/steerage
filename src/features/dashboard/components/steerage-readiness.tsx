@@ -105,7 +105,7 @@ export function SteerageReadiness() {
         </div>
 
         {/* Steerage-eligible pool */}
-        <div className="rounded-lg bg-[color:var(--color-status-success-bg)] px-3 py-2">
+        <div className="rounded-lg border border-border-subtle bg-[color:var(--color-surface-subtle)] px-3 py-2">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-status-success">
             Steerage-eligible pool
           </p>
@@ -120,7 +120,7 @@ export function SteerageReadiness() {
         </div>
 
         {/* Engagement opportunity */}
-        <div className="rounded-lg bg-[color:var(--color-status-error-bg)] px-3 py-2">
+        <div className="rounded-lg border border-border-subtle bg-[color:var(--color-surface-subtle)] px-3 py-2">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-status-error">
             Engagement opportunity
           </p>

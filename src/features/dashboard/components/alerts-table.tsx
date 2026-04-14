@@ -8,9 +8,9 @@ import { cn } from "@/lib/cn";
 import type { CtaAlert } from "@/types";
 
 const severityColors: Record<string, string> = {
-  critical: "border-status-error text-status-error bg-status-error-bg",
-  high: "border-status-warning text-status-warning bg-status-warning-bg",
-  medium: "border-status-info text-status-info bg-status-info-bg",
+  critical: "border-status-error text-status-error",
+  high: "border-status-warning text-status-warning",
+  medium: "border-border-default text-text-secondary",
   low: "border-border-default text-text-muted",
 };
 

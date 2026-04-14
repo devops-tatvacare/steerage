@@ -28,7 +28,7 @@ export function DashboardPage() {
   return (
     <div className="space-y-4">
       <PageHeader
-        title="Dashboard"
+        title="Command Center"
         description="Steerage performance overview"
         actions={
           <Tabs value={period} onValueChange={(v) => setPeriod(v as "30d" | "60d" | "90d")}>
