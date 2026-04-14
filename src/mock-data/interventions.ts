@@ -29,7 +29,7 @@ export const MOCK_INTERVENTIONS: Intervention[] = [
       { field: "member.riskTier", operator: "neq", value: "low" },
     ],
     template:
-      "Before booking, here are PMCares recommended providers for your {{condition}} care. These providers offer cashless service and have the best clinical outcomes in your area.",
+      "Before booking, here are our recommended providers for your {{condition}} care. These providers offer cashless service and have the best clinical outcomes in your area.",
     channels: ["in_app", "email"],
     abTestEnabled: false,
     acceptanceRate: 0.58,
@@ -114,7 +114,7 @@ export const MOCK_INTERVENTIONS: Intervention[] = [
       { field: "member.overrideCount", operator: "gte", value: 5 },
     ],
     template:
-      "A PMCares care navigator will reach out to help coordinate your treatment plan. They can assist with provider selection, appointment scheduling, and ensuring your benefits are maximised.",
+      "A care navigator will reach out to help coordinate your treatment plan. They can assist with provider selection, appointment scheduling, and ensuring your benefits are maximised.",
     channels: ["sms", "push"],
     abTestEnabled: false,
     acceptanceRate: 0.72,

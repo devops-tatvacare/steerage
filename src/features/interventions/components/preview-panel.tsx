@@ -18,7 +18,7 @@ function DeviceFrame({ children }: { children: React.ReactNode }) {
         <div className="bg-bg-secondary px-4 py-2">
           <div className="flex items-center gap-2">
             <div className="h-2 w-2 rounded-full bg-brand-primary" />
-            <span className="text-[10px] font-semibold text-text-primary">PMCares</span>
+            <span className="text-[10px] font-semibold text-text-primary">TatvaCare</span>
           </div>
         </div>
         <div className="p-4">{children}</div>

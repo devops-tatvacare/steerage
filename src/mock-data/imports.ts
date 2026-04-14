@@ -27,7 +27,7 @@ export const MOCK_IMPORTS: DataImport[] = [
   },
   {
     id: "imp-002",
-    fileName: "pmcares_panel_providers.xlsx",
+    fileName: "panel_providers.xlsx",
     fileType: "xlsx",
     dataType: "providers",
     status: "live",

@@ -17,7 +17,7 @@ export async function generateInsights(kpiData: string): Promise<string[]> {
   try {
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
-      contents: `You are a healthcare steerage analytics assistant for a Malaysian TPA (Sumitomo/PMCares). Given the following KPI data, generate exactly 4 concise actionable insights for a payor operations team. Each insight must be one sentence. Focus on: trends, anomalies, opportunities, and risks. Use Malaysian context (RM currency, Malaysian cities).\n\nKPI Data:\n${kpiData}`,
+      contents: `You are a healthcare steerage analytics assistant for a Malaysian TPA (Sumitomo). Given the following KPI data, generate exactly 4 concise actionable insights for a payor operations team. Each insight must be one sentence. Focus on: trends, anomalies, opportunities, and risks. Use Malaysian context (RM currency, Malaysian cities).\n\nKPI Data:\n${kpiData}`,
     });
 
     const text = response.text ?? "";
