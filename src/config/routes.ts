@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { LayoutDashboard, SlidersHorizontal, Building2, Megaphone, Users, BarChart3, Upload, Settings } from "lucide-react";
+import { LayoutDashboard, SlidersHorizontal, Building2, Megaphone, Users, BarChart3, Upload, Settings, BookOpen } from "lucide-react";
 
 export interface RouteConfig {
   path: string;
@@ -17,6 +17,7 @@ export const ROUTES = {
   members: { path: "/members", label: "Members", icon: Users, group: "primary" as const, showInSidebar: true },
   memberDetail: { path: "/members/:id", label: "Member Detail", icon: Users, group: "primary" as const, showInSidebar: false },
   analytics: { path: "/analytics", label: "Analytics", icon: BarChart3, group: "primary" as const, showInSidebar: true },
+  guide: { path: "/guide", label: "Sales Guide", icon: BookOpen, group: "config" as const, showInSidebar: true },
   dataOnboarding: { path: "/onboarding", label: "Data Onboarding", icon: Upload, group: "config" as const, showInSidebar: true },
   settings: { path: "/settings", label: "Settings", icon: Settings, group: "config" as const, showInSidebar: true },
 } as const;

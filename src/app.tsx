@@ -9,6 +9,7 @@ import { MemberDetailPage } from "@/features/members/detail-page";
 import { AnalyticsPage } from "@/features/analytics/page";
 import { DataOnboardingPage } from "@/features/data-onboarding/page";
 import { SettingsPage } from "@/features/settings/page";
+import { GuidePage } from "@/features/guide/page";
 
 export function App() {
   return (
@@ -22,6 +23,7 @@ export function App() {
           <Route path="/members" element={<MembersPage />} />
           <Route path="/members/:id" element={<MemberDetailPage />} />
           <Route path="/analytics" element={<AnalyticsPage />} />
+          <Route path="/guide" element={<GuidePage />} />
           <Route path="/onboarding" element={<DataOnboardingPage />} />
           <Route path="/settings" element={<SettingsPage />} />
         </Routes>
