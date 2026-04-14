@@ -16,19 +16,23 @@ const typeColors: Record<string, string> = {
 export function ActivityFeed() {
   const events = [...MOCK_STEERAGE_EVENTS]
     .sort((a, b) => b.timestamp.localeCompare(a.timestamp))
-    .slice(0, 10);
+    .slice(0, 8);
 
   return (
-    <DashboardCard icon={Activity} title="Recent Activity" description="Latest steerage interactions" badge={events.length}>
-      <div className="space-y-2">
+    <DashboardCard icon={Activity} title="Recent Activity" description="Latest steerage interactions" badge={events.length} contentClassName="flex flex-col">
+      <div className="flex flex-1 flex-col justify-between">
         {events.map((e) => (
-          <div key={e.id} className="flex items-start gap-2 text-xs">
-            <span className="mt-0.5 shrink-0 text-text-placeholder">{new Date(e.timestamp).toLocaleDateString("en-MY", { day: "2-digit", month: "short" })}</span>
-            <Badge variant="outline" className={cn("shrink-0 text-[9px]", typeColors[e.type])}>{e.type.replace("_", " ")}</Badge>
-            <span className="truncate text-text-secondary">
+          <div key={e.id} className="flex items-center gap-2.5 rounded-md px-2 py-1.5 transition-colors hover:bg-bg-hover">
+            <span className="shrink-0 text-[10px] tabular-nums text-text-placeholder">
+              {new Date(e.timestamp).toLocaleDateString("en-MY", { day: "2-digit", month: "short" })}
+            </span>
+            <Badge variant="outline" className={cn("shrink-0 text-[9px]", typeColors[e.type])}>
+              {e.type.replace("_", " ")}
+            </Badge>
+            <span className="min-w-0 flex-1 truncate text-xs text-text-secondary">
               {e.providerRecommended && `Rec: ${e.providerRecommended}`}
               {e.providerChosen && ` / Chose: ${e.providerChosen}`}
-              {e.costDifferential && ` (RM ${e.costDifferential})`}
+              {e.costDifferential ? ` (RM ${e.costDifferential})` : ""}
             </span>
           </div>
         ))}

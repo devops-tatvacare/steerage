@@ -19,8 +19,8 @@ interface DashboardCardProps {
 export function DashboardCard({ icon: Icon, title, description, badge, actions, variant = "default", showSeparator = true, className, contentClassName, children }: DashboardCardProps) {
   const isAi = variant === "ai";
   return (
-    <Card variant={isAi ? "ai" : "elevated"} density="flush" className={cn("overflow-hidden", className)}>
-      <CardHeader className="px-[var(--space-panel-padding)] py-[var(--space-panel-padding)]">
+    <Card variant={isAi ? "ai" : "elevated"} density="flush" className={cn("flex h-full flex-col overflow-hidden", className)}>
+      <CardHeader className="shrink-0 px-[var(--space-panel-padding)] py-[var(--space-panel-padding)]">
         <div className="flex items-start gap-3">
           {Icon && (
             <div className={cn("mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border", isAi ? "border-ai-border bg-[color:var(--color-surface-ai)] text-ai-primary" : "border-[color:var(--color-surface-border)] bg-[color:var(--color-surface-muted)] text-text-muted")}>
@@ -40,7 +40,7 @@ export function DashboardCard({ icon: Icon, title, description, badge, actions, 
         </div>
       </CardHeader>
       {showSeparator && <Separator />}
-      <CardContent className={cn("px-[var(--space-panel-padding)] py-[var(--space-panel-padding)]", contentClassName)}>
+      <CardContent className={cn("flex-1 px-[var(--space-panel-padding)] py-[var(--space-panel-padding)]", contentClassName)}>
         {children}
       </CardContent>
     </Card>
