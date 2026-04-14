@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { SIDEBAR_GROUPS } from "@/config/navigation";
 import { useTheme } from "@/hooks/use-theme";
 import { cn } from "@/lib/cn";
-import { Sun, Moon, PanelLeftClose, PanelLeftOpen, Navigation } from "lucide-react";
+import { Sun, Moon, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 
 interface AppSidebarProps {
   collapsed: boolean;
@@ -21,10 +21,15 @@ export function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
       )}
     >
       {/* Brand */}
-      <div className="flex h-14 shrink-0 items-center gap-2.5 border-b border-sidebar-divider px-4">
-        <Navigation className="h-5 w-5 shrink-0 text-sidebar-active-text" />
-        {!collapsed && (
-          <span className="text-sm font-semibold text-sidebar-active-text">PMCares Steerage</span>
+      <div className="flex h-14 shrink-0 items-center justify-center border-b border-sidebar-divider px-2">
+        {collapsed ? (
+          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-white">
+            <img src="/steerage/tatvacare-logo.svg" alt="TatvaCare" className="h-5 w-auto" />
+          </div>
+        ) : (
+          <div className="flex h-8 items-center rounded-md bg-white px-2.5">
+            <img src="/steerage/tatvacare-logo.svg" alt="TatvaCare" className="h-5 w-auto" />
+          </div>
         )}
       </div>
 
