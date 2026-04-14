@@ -3,6 +3,7 @@ import { Calculator } from "lucide-react";
 import { DashboardCard } from "@/components/shared/dashboard-card";
 import { MetricTooltip } from "@/components/shared/metric-tooltip";
 import { MOCK_STEERAGE_EVENTS } from "@/mock-data/members";
+import { cn } from "@/lib/cn";
 
 function formatRM(value: number): string {
   return `RM ${Math.abs(value).toLocaleString("en-MY")}`;
@@ -12,43 +13,28 @@ export function RoiSummary() {
   const metrics = useMemo(() => {
     const events = MOCK_STEERAGE_EVENTS;
 
-    const totalSteered = events.filter((e) => e.type === "recommendation").length;
+    const recommendations = events.filter((e) => e.type === "recommendation");
     const acceptedEvents = events.filter((e) => e.type === "acceptance");
     const overrideEvents = events.filter((e) => e.type === "override");
+    const dismissalEvents = events.filter((e) => e.type === "dismissal");
 
-    const acceptanceRate =
-      totalSteered > 0
-        ? (acceptedEvents.length / totalSteered) * 100
-        : 0;
+    const totalSteered = recommendations.length;
+    const acceptanceRate = totalSteered > 0 ? (acceptedEvents.length / totalSteered) * 100 : 0;
 
-    // costDifferential on overrides is negative (cost lost), on acceptance it's 0 or positive (saved).
-    // Savings = sum of absolute costDifferential on acceptance events where differential indicates a savings scenario.
-    // Actually for acceptance events costDifferential is 0 (they accepted the recommended provider).
-    // The "savings" is the cost avoided by NOT going to the more expensive provider.
-    // We need to estimate savings differently: for each acceptance, the savings is the average override cost differential.
-    // Better approach: sum the absolute value of costDifferential on overrides = money lost.
-    // Total potential = if those overrides had been accepted, that money would be saved.
-    const lostSavings = overrideEvents.reduce(
-      (sum, e) => sum + Math.abs(e.costDifferential || 0),
-      0,
-    );
-
-    // Savings generated: acceptance events accepted the recommended (lower-cost) provider.
-    // The cost differential on acceptance is 0 because they chose the recommended provider.
-    // The *real* savings is: for every acceptance, the member avoided the override cost.
-    // Use the average override differential as a proxy for savings per accepted recommendation.
-    const avgOverrideCost =
-      overrideEvents.length > 0
-        ? lostSavings / overrideEvents.length
-        : 0;
+    const lostSavings = overrideEvents.reduce((sum, e) => sum + Math.abs(e.costDifferential || 0), 0);
+    const avgOverrideCost = overrideEvents.length > 0 ? lostSavings / overrideEvents.length : 0;
     const totalSavings = Math.round(acceptedEvents.length * avgOverrideCost);
+    const avgSavingsPerAccept = acceptedEvents.length > 0 ? Math.round(totalSavings / acceptedEvents.length) : 0;
 
     return {
       totalSteered,
       acceptedCount: acceptedEvents.length,
+      overrideCount: overrideEvents.length,
+      dismissalCount: dismissalEvents.length,
       acceptanceRate: Math.round(acceptanceRate * 10) / 10,
       totalSavings,
       lostSavings,
+      avgSavingsPerAccept,
     };
   }, []);
 
@@ -57,65 +43,65 @@ export function RoiSummary() {
   const lostPct = savingsTotal > 0 ? (metrics.lostSavings / savingsTotal) * 100 : 0;
 
   return (
-    <DashboardCard icon={Calculator} title="ROI Summary" description="Savings generated from steered transactions">
-      <div className="grid grid-cols-3 gap-4">
-        {/* Transactions Steered */}
-        <div className="text-center">
-          <p className="text-2xl font-bold text-text-primary">
-            {metrics.totalSteered}
-          </p>
-          <p className="mt-0.5 inline-flex items-center gap-1 text-xs text-text-muted">
-            rules applied
-            <MetricTooltip title="Transactions Steered" description="Number of member transactions where the steerage rule engine applied a provider recommendation." formula="COUNT(events WHERE type = recommendation)" />
-          </p>
+    <DashboardCard icon={Calculator} title="ROI Summary" description="Savings generated from steered transactions" contentClassName="flex flex-col">
+      <div className="flex flex-1 flex-col justify-between gap-4">
+        {/* Hero: total savings */}
+        <div className="flex items-baseline justify-between">
+          <div>
+            <p className="text-3xl font-bold text-status-success">{formatRM(metrics.totalSavings)}</p>
+            <p className="mt-0.5 inline-flex items-center gap-1 text-xs text-text-muted">
+              total savings captured
+              <MetricTooltip title="Savings Generated" description="Estimated cost avoided by members choosing the recommended lower-cost provider." formula="SUM(avg override cost x accepted count)" />
+            </p>
+          </div>
+          <div className="text-right">
+            <p className="text-lg font-bold text-status-error">{formatRM(metrics.lostSavings)}</p>
+            <p className="text-[10px] text-text-muted">lost to overrides</p>
+          </div>
         </div>
 
-        {/* Acceptance Rate */}
-        <div className="text-center">
-          <p className="text-2xl font-bold text-text-primary">
-            {metrics.acceptanceRate}%
-          </p>
-          <p className="mt-0.5 inline-flex items-center gap-1 text-xs text-text-muted">
-            {metrics.acceptedCount} of {metrics.totalSteered} accepted
-            <MetricTooltip title="Steerage Acceptance Rate" description="Proportion of steered transactions where the member followed the recommendation and booked the suggested provider." formula="Accepted / Total steered x 100" target=">= 60%" />
-          </p>
+        {/* Savings bar */}
+        <div className="space-y-1">
+          <div className="flex items-center gap-0.5 overflow-hidden rounded-md" style={{ height: 14 }}>
+            {capturedPct > 0 && (
+              <div className="h-full rounded-l-md bg-[color:var(--color-status-success)]" style={{ width: `${capturedPct}%` }} />
+            )}
+            {lostPct > 0 && (
+              <div className="h-full rounded-r-md bg-[color:var(--color-status-error)] opacity-40" style={{ width: `${lostPct}%` }} />
+            )}
+          </div>
+          <div className="flex justify-between text-[10px] text-text-muted">
+            <span>Captured ({Math.round(capturedPct)}%)</span>
+            <span>Lost ({Math.round(lostPct)}%)</span>
+          </div>
         </div>
 
-        {/* Savings Generated */}
-        <div className="text-center">
-          <p className="text-2xl font-bold text-status-success">
-            {formatRM(metrics.totalSavings)}
-          </p>
-          <p className="mt-0.5 inline-flex items-center gap-1 text-xs text-text-muted">
-            potential {formatRM(metrics.lostSavings)} lost
-            <MetricTooltip title="Savings Generated" description="Estimated cost avoided by members choosing the recommended lower-cost provider instead of their initial preference." formula="SUM(cost differential x acceptance events)" />
-          </p>
-        </div>
-      </div>
-
-      {/* Savings bar */}
-      <div className="mt-4 space-y-1.5">
-        <div className="flex items-center gap-1 overflow-hidden rounded-md" style={{ height: 20 }}>
-          {capturedPct > 0 && (
-            <div
-              className="flex h-full items-center justify-center rounded-l-md bg-[color:var(--color-status-success)] px-2 text-[10px] font-semibold text-white"
-              style={{ width: `${capturedPct}%`, minWidth: "fit-content" }}
-            >
-              {formatRM(metrics.totalSavings)}
-            </div>
-          )}
-          {lostPct > 0 && (
-            <div
-              className="flex h-full items-center justify-center rounded-r-md bg-[color:var(--color-status-error)] px-2 text-[10px] font-semibold text-white"
-              style={{ width: `${lostPct}%`, minWidth: "fit-content" }}
-            >
-              {formatRM(metrics.lostSavings)}
-            </div>
-          )}
-        </div>
-        <div className="flex justify-between text-[10px] text-text-muted">
-          <span>Savings captured</span>
-          <span>Savings lost to overrides</span>
+        {/* Metrics grid */}
+        <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+          <div>
+            <p className="text-lg font-bold text-text-primary">{metrics.totalSteered}</p>
+            <p className="inline-flex items-center gap-1 text-[10px] text-text-muted">
+              transactions steered
+              <MetricTooltip title="Transactions Steered" description="Total recommendations surfaced to members by the rule engine." formula="COUNT(recommendation events)" />
+            </p>
+          </div>
+          <div>
+            <p className="text-lg font-bold text-text-primary">{metrics.acceptanceRate}%</p>
+            <p className="inline-flex items-center gap-1 text-[10px] text-text-muted">
+              acceptance rate
+              <MetricTooltip title="Acceptance Rate" description="Proportion of steered transactions where the member booked the recommended provider." formula="Accepted / Steered x 100" target=">= 60%" />
+            </p>
+          </div>
+          <div>
+            <p className="text-lg font-bold text-text-primary">{formatRM(metrics.avgSavingsPerAccept)}</p>
+            <p className="text-[10px] text-text-muted">avg savings per accept</p>
+          </div>
+          <div>
+            <p className={cn("text-lg font-bold", metrics.overrideCount > metrics.acceptedCount ? "text-status-error" : "text-text-primary")}>
+              {metrics.acceptedCount} / {metrics.overrideCount}
+            </p>
+            <p className="text-[10px] text-text-muted">accepted / overridden</p>
+          </div>
         </div>
       </div>
     </DashboardCard>
