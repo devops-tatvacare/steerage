@@ -94,6 +94,9 @@ export interface Member {
   benefitsTotal: number;
   annualSpend: number;
   projectedSpend: number;
+  appEngaged: boolean;
+  transactionsOnApp: number;
+  totalTransactions: number;
 }
 
 export interface SteerageEvent {

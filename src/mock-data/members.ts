@@ -20,6 +20,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 6,
     annualSpend: 1200,
     projectedSpend: 1800,
+    appEngaged: true,
+    transactionsOnApp: 5,
+    totalTransactions: 7,
   },
   {
     id: "mem-002",
@@ -39,6 +42,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 4,
     annualSpend: 350,
     projectedSpend: 600,
+    appEngaged: true,
+    transactionsOnApp: 3,
+    totalTransactions: 4,
   },
   {
     id: "mem-003",
@@ -58,6 +64,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 6,
     annualSpend: 2100,
     projectedSpend: 2800,
+    appEngaged: true,
+    transactionsOnApp: 6,
+    totalTransactions: 9,
   },
   {
     id: "mem-004",
@@ -77,6 +86,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 8,
     annualSpend: 480,
     projectedSpend: 900,
+    appEngaged: false,
+    transactionsOnApp: 1,
+    totalTransactions: 3,
   },
   {
     id: "mem-005",
@@ -96,6 +108,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 4,
     annualSpend: 0,
     projectedSpend: 400,
+    appEngaged: true,
+    transactionsOnApp: 2,
+    totalTransactions: 3,
   },
   {
     id: "mem-006",
@@ -115,6 +130,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 6,
     annualSpend: 1500,
     projectedSpend: 2200,
+    appEngaged: true,
+    transactionsOnApp: 4,
+    totalTransactions: 6,
   },
   {
     id: "mem-007",
@@ -134,6 +152,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 4,
     annualSpend: 250,
     projectedSpend: 500,
+    appEngaged: true,
+    transactionsOnApp: 3,
+    totalTransactions: 4,
   },
   {
     id: "mem-008",
@@ -153,6 +174,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 8,
     annualSpend: 2800,
     projectedSpend: 3500,
+    appEngaged: false,
+    transactionsOnApp: 3,
+    totalTransactions: 8,
   },
 
   // ── Moderate risk (10) ──
@@ -174,6 +198,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 6,
     annualSpend: 6200,
     projectedSpend: 8500,
+    appEngaged: true,
+    transactionsOnApp: 8,
+    totalTransactions: 14,
   },
   {
     id: "mem-010",
@@ -193,6 +220,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 8,
     annualSpend: 9400,
     projectedSpend: 12000,
+    appEngaged: false,
+    transactionsOnApp: 4,
+    totalTransactions: 18,
   },
   {
     id: "mem-011",
@@ -212,6 +242,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 6,
     annualSpend: 4800,
     projectedSpend: 6200,
+    appEngaged: true,
+    transactionsOnApp: 7,
+    totalTransactions: 12,
   },
   {
     id: "mem-012",
@@ -231,6 +264,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 10,
     annualSpend: 8200,
     projectedSpend: 10500,
+    appEngaged: false,
+    transactionsOnApp: 5,
+    totalTransactions: 16,
   },
   {
     id: "mem-013",
@@ -250,6 +286,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 6,
     annualSpend: 3900,
     projectedSpend: 5800,
+    appEngaged: true,
+    transactionsOnApp: 6,
+    totalTransactions: 10,
   },
   {
     id: "mem-014",
@@ -269,6 +308,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 8,
     annualSpend: 3200,
     projectedSpend: 7500,
+    appEngaged: false,
+    transactionsOnApp: 2,
+    totalTransactions: 8,
   },
   {
     id: "mem-015",
@@ -288,6 +330,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 6,
     annualSpend: 5100,
     projectedSpend: 6800,
+    appEngaged: false,
+    transactionsOnApp: 4,
+    totalTransactions: 11,
   },
   {
     id: "mem-016",
@@ -307,6 +352,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 10,
     annualSpend: 4500,
     projectedSpend: 5600,
+    appEngaged: true,
+    transactionsOnApp: 8,
+    totalTransactions: 12,
   },
   {
     id: "mem-017",
@@ -326,6 +374,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 8,
     annualSpend: 7300,
     projectedSpend: 9200,
+    appEngaged: false,
+    transactionsOnApp: 3,
+    totalTransactions: 15,
   },
   {
     id: "mem-018",
@@ -345,6 +396,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 6,
     annualSpend: 3400,
     projectedSpend: 5000,
+    appEngaged: true,
+    transactionsOnApp: 5,
+    totalTransactions: 7,
   },
 
   // ── High risk (8) ──
@@ -366,6 +420,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 8,
     annualSpend: 18500,
     projectedSpend: 24000,
+    appEngaged: false,
+    transactionsOnApp: 3,
+    totalTransactions: 22,
   },
   {
     id: "mem-020",
@@ -385,6 +442,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 10,
     annualSpend: 32000,
     projectedSpend: 42000,
+    appEngaged: true,
+    transactionsOnApp: 12,
+    totalTransactions: 20,
   },
   {
     id: "mem-021",
@@ -404,6 +464,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 8,
     annualSpend: 15600,
     projectedSpend: 20000,
+    appEngaged: false,
+    transactionsOnApp: 4,
+    totalTransactions: 19,
   },
   {
     id: "mem-022",
@@ -423,6 +486,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 6,
     annualSpend: 11200,
     projectedSpend: 14800,
+    appEngaged: false,
+    transactionsOnApp: 3,
+    totalTransactions: 15,
   },
   {
     id: "mem-023",
@@ -442,6 +508,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 8,
     annualSpend: 21000,
     projectedSpend: 27500,
+    appEngaged: false,
+    transactionsOnApp: 2,
+    totalTransactions: 20,
   },
   {
     id: "mem-024",
@@ -461,6 +530,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 10,
     annualSpend: 38000,
     projectedSpend: 48000,
+    appEngaged: true,
+    transactionsOnApp: 10,
+    totalTransactions: 18,
   },
   {
     id: "mem-025",
@@ -480,6 +552,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 6,
     annualSpend: 14200,
     projectedSpend: 19000,
+    appEngaged: false,
+    transactionsOnApp: 2,
+    totalTransactions: 17,
   },
   {
     id: "mem-026",
@@ -499,6 +574,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 8,
     annualSpend: 12800,
     projectedSpend: 16500,
+    appEngaged: false,
+    transactionsOnApp: 3,
+    totalTransactions: 14,
   },
 
   // ── Critical risk (4) ──
@@ -520,6 +598,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 10,
     annualSpend: 45000,
     projectedSpend: 62000,
+    appEngaged: false,
+    transactionsOnApp: 3,
+    totalTransactions: 25,
   },
   {
     id: "mem-028",
@@ -539,6 +620,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 8,
     annualSpend: 52000,
     projectedSpend: 68000,
+    appEngaged: true,
+    transactionsOnApp: 13,
+    totalTransactions: 23,
   },
   {
     id: "mem-029",
@@ -558,6 +642,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 8,
     annualSpend: 38000,
     projectedSpend: 50000,
+    appEngaged: false,
+    transactionsOnApp: 4,
+    totalTransactions: 22,
   },
   {
     id: "mem-030",
@@ -577,6 +664,9 @@ export const MOCK_MEMBERS: Member[] = [
     benefitsTotal: 10,
     annualSpend: 58000,
     projectedSpend: 75000,
+    appEngaged: false,
+    transactionsOnApp: 2,
+    totalTransactions: 21,
   },
 ];
 

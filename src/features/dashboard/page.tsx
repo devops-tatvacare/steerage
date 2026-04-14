@@ -7,6 +7,9 @@ import { AlertsTable } from "./components/alerts-table";
 import { AiInsightsPanel } from "./components/ai-insights-panel";
 import { ActivityFeed } from "./components/activity-feed";
 import { SteerageTrends } from "./components/steerage-trends";
+import { RoiSummary } from "./components/roi-summary";
+import { CohortMatrix } from "./components/cohort-matrix";
+import { SteerageReadiness } from "./components/steerage-readiness";
 import { Loader2 } from "lucide-react";
 
 export function DashboardPage() {
@@ -38,6 +41,11 @@ export function DashboardPage() {
         }
       />
       <KpiStrip kpis={kpis} />
+      <RoiSummary />
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <CohortMatrix />
+        <SteerageReadiness />
+      </div>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         <div className="space-y-4 lg:col-span-2">
           <SteerageTrends kpis={kpis} />
