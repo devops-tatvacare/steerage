@@ -19,7 +19,7 @@ export function ActivityFeed() {
     .slice(0, 10);
 
   return (
-    <DashboardCard icon={Activity} title="Recent Activity" badge={events.length}>
+    <DashboardCard icon={Activity} title="Recent Activity" description="Latest steerage interactions" badge={events.length}>
       <div className="space-y-2">
         {events.map((e) => (
           <div key={e.id} className="flex items-start gap-2 text-xs">

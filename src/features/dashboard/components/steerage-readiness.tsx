@@ -60,7 +60,7 @@ export function SteerageReadiness() {
   const highCostCritical = data.highCostEngagementRate < 50;
 
   return (
-    <DashboardCard icon={Target} title="Steerage Readiness">
+    <DashboardCard icon={Target} title="Steerage Readiness" description="App engagement is a prerequisite to effective steerage">
       <div className="space-y-4">
         {/* Overall engagement */}
         <div>

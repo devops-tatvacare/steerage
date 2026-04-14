@@ -26,7 +26,7 @@ export function DashboardPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <PageHeader
         title="Dashboard"
         description="Steerage performance overview"
@@ -40,21 +40,31 @@ export function DashboardPage() {
           </Tabs>
         }
       />
+
+      {/* Row 1: KPIs */}
       <KpiStrip kpis={kpis} />
-      <RoiSummary />
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+
+      {/* Row 2: Expert concepts -- 3 equal columns */}
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <RoiSummary />
         <CohortMatrix />
         <SteerageReadiness />
       </div>
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <div className="space-y-4 lg:col-span-2">
+
+      {/* Row 3: Trends + AI insights */}
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
+        <div className="lg:col-span-3">
           <SteerageTrends kpis={kpis} />
-          <AlertsTable />
         </div>
-        <div className="space-y-4">
+        <div className="lg:col-span-2">
           <AiInsightsPanel />
-          <ActivityFeed />
         </div>
+      </div>
+
+      {/* Row 4: Alerts + Activity -- equal columns */}
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <AlertsTable />
+        <ActivityFeed />
       </div>
     </div>
   );

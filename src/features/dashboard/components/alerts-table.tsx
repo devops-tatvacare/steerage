@@ -1,14 +1,11 @@
-import { useState } from "react";
 import { DashboardCard } from "@/components/shared/dashboard-card";
-import { DataTable, type Column } from "@/components/shared/data-table";
 import { StatusBadge } from "@/components/shared/status-badge";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useDashboardStore } from "@/stores/dashboard-store";
 import { Bell, Check, X } from "lucide-react";
-import type { CtaAlert } from "@/types";
 import { cn } from "@/lib/cn";
+import type { CtaAlert } from "@/types";
 
 const severityColors: Record<string, string> = {
   critical: "border-status-error text-status-error bg-status-error-bg",
@@ -17,51 +14,54 @@ const severityColors: Record<string, string> = {
   low: "border-border-default text-text-muted",
 };
 
-const columns: Column<CtaAlert>[] = [
-  {
-    key: "severity",
-    header: "Severity",
-    cell: (row) => <Badge variant="outline" className={cn("text-[10px]", severityColors[row.severity])}>{row.severity}</Badge>,
-  },
-  { key: "title", header: "Alert", cell: (row) => <span className="text-sm font-medium text-text-primary">{row.title}</span> },
-  { key: "kpiType", header: "KPI", cell: (row) => <span className="text-xs text-text-muted">{row.kpiType.replace(/_/g, " ")}</span> },
-  { key: "action", header: "Action Required", cell: (row) => <span className="text-xs text-text-secondary line-clamp-1">{row.action}</span> },
-  { key: "status", header: "Status", cell: (row) => <StatusBadge status={row.status} /> },
-  {
-    key: "actions",
-    header: "",
-    cell: (row) => {
-      const { actionAlert, dismissAlert } = useDashboardStore.getState();
-      if (row.status !== "pending") return null;
-      return (
-        <div className="flex items-center gap-1">
-          <Button variant="ghost" size="icon-xs" onClick={(e) => { e.stopPropagation(); actionAlert(row.id); }}><Check className="h-3.5 w-3.5 text-status-success" /></Button>
-          <Button variant="ghost" size="icon-xs" onClick={(e) => { e.stopPropagation(); dismissAlert(row.id); }}><X className="h-3.5 w-3.5 text-status-error" /></Button>
+function AlertRow({ alert }: { alert: CtaAlert }) {
+  const { actionAlert, dismissAlert } = useDashboardStore();
+  return (
+    <div className="flex items-center gap-3 rounded-md px-2.5 py-2 transition-colors hover:bg-bg-hover">
+      <Badge variant="outline" className={cn("shrink-0 text-[9px]", severityColors[alert.severity])}>
+        {alert.severity}
+      </Badge>
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-xs font-medium text-text-primary">{alert.title}</p>
+        <p className="truncate text-[10px] text-text-muted">{alert.action}</p>
+      </div>
+      <StatusBadge status={alert.status} />
+      {alert.status === "pending" && (
+        <div className="flex shrink-0 items-center gap-0.5">
+          <Button variant="ghost" size="icon-xs" onClick={() => actionAlert(alert.id)}>
+            <Check className="h-3 w-3 text-status-success" />
+          </Button>
+          <Button variant="ghost" size="icon-xs" onClick={() => dismissAlert(alert.id)}>
+            <X className="h-3 w-3 text-status-error" />
+          </Button>
         </div>
-      );
-    },
-  },
-];
+      )}
+    </div>
+  );
+}
 
 export function AlertsTable() {
   const { alerts } = useDashboardStore();
-  const [tab, setTab] = useState("all");
-
-  const filtered = tab === "all" ? alerts : alerts.filter((a) => a.status === tab);
+  const pending = alerts.filter((a) => a.status === "pending");
+  const display = pending.length > 0 ? pending.slice(0, 6) : alerts.slice(0, 6);
 
   return (
-    <DashboardCard icon={Bell} title="Active Alerts" badge={alerts.filter((a) => a.status === "pending").length}>
-      <Tabs value={tab} onValueChange={setTab}>
-        <TabsList variant="line">
-          <TabsTrigger value="all">All ({alerts.length})</TabsTrigger>
-          <TabsTrigger value="pending">Pending ({alerts.filter((a) => a.status === "pending").length})</TabsTrigger>
-          <TabsTrigger value="actioned">Actioned ({alerts.filter((a) => a.status === "actioned").length})</TabsTrigger>
-          <TabsTrigger value="dismissed">Dismissed ({alerts.filter((a) => a.status === "dismissed").length})</TabsTrigger>
-        </TabsList>
-        <TabsContent value={tab}>
-          <DataTable columns={columns} data={filtered} emptyTitle="No alerts" emptyDescription="All clear" />
-        </TabsContent>
-      </Tabs>
+    <DashboardCard
+      icon={Bell}
+      title="Active Alerts"
+      description="CTA actions triggered by KPI thresholds"
+      badge={pending.length}
+    >
+      <div className="space-y-0.5">
+        {display.map((alert) => (
+          <AlertRow key={alert.id} alert={alert} />
+        ))}
+      </div>
+      {alerts.length > 6 && (
+        <p className="mt-2 text-center text-[10px] text-text-muted">
+          {alerts.length - 6} more alerts in Analytics
+        </p>
+      )}
     </DashboardCard>
   );
 }

@@ -36,6 +36,7 @@ export function AiInsightsPanel() {
     <DashboardCard
       icon={Sparkles}
       title="AI Insights"
+      description="Gemini-powered analysis of steerage patterns"
       variant="ai"
       actions={
         <Button variant="ghost" size="icon-xs" onClick={refresh} disabled={loading}>

@@ -56,7 +56,7 @@ export function RoiSummary() {
   const lostPct = savingsTotal > 0 ? (metrics.lostSavings / savingsTotal) * 100 : 0;
 
   return (
-    <DashboardCard icon={Calculator} title="ROI Summary">
+    <DashboardCard icon={Calculator} title="ROI Summary" description="Savings generated from steered transactions">
       <div className="grid grid-cols-3 gap-4">
         {/* Transactions Steered */}
         <div className="text-center">
