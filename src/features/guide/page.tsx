@@ -154,7 +154,7 @@ export function GuidePage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Sales Guide"
+        title="Guide"
         description="How to walk a payor through the steerage platform -- mapped to expert narrative"
       />
 

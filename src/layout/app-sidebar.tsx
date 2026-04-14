@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { SIDEBAR_GROUPS } from "@/config/navigation";
 import { useTheme } from "@/hooks/use-theme";
 import { cn } from "@/lib/cn";
-import { Sun, Moon, PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { Sun, Moon, PanelLeftClose, PanelLeftOpen, BookOpen } from "lucide-react";
 
 interface AppSidebarProps {
   collapsed: boolean;
@@ -87,6 +87,19 @@ export function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
           {collapsed ? <PanelLeftOpen className="h-4 w-4 shrink-0" /> : <PanelLeftClose className="h-4 w-4 shrink-0" />}
           {!collapsed && <span>Collapse</span>}
         </button>
+        <Link
+          to="/guide"
+          className={cn(
+            "flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-sm transition-colors",
+            location.pathname === "/guide"
+              ? "bg-sidebar-active-bg text-sidebar-active-text"
+              : "text-sidebar-text hover:bg-sidebar-active-bg/50 hover:text-sidebar-active-text",
+            collapsed && "justify-center px-0"
+          )}
+        >
+          <BookOpen className="h-4 w-4 shrink-0" />
+          {!collapsed && <span>Guide</span>}
+        </Link>
       </div>
     </aside>
   );
